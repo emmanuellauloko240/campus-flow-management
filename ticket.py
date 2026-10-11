@@ -9,11 +9,26 @@ def calculate_priority(urgency,affected_users):
          return "medium"
     else:
         return "low"
+ALLOWED_URGENCIES = ["low","medium","high"]
 def ticket(ticket_id, title, category, urgency, affected_users):
+    title = title.strip()
+    category = category.strip().capitalize()
+    urgency = urgency.strip().lower()
     if title.strip() == "":
         raise ValueError("Title cannot be blank")
     if category not in ALLOWED_CATEGORIES:
         raise ValueError("Invalid category")
+    if urgency not in ALLOWED_URGENCIES:
+        raise ValueError("invalid urgency")
+
+    if(
+        not isinstance (affected_users,int)
+        or isinstance (affected_users, bool)
+        or affected_users <= 0
+    ):
+
+        raise ValueError("Affected users must be a positive whole number")
+        
     priority = calculate_priority(urgency,affected_users)
 
 

@@ -34,5 +34,22 @@ class TestPriority(unittest.TestCase):
         with self.assertRaises(ValueError):
             ticket("T001", "Wi-Fi down", "Banana", "high", 5)
 
+    def test_invalid_urgency_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ticket("T001", "Wi-Fi down", "Network", "urgent", 5)
+
+    def test_zero_users_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ticket("T001", "Wi-Fi down", "Network", "high", 0)
+
+    def test_decimal_users_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ticket("T001", "Wi-Fi down", "Network", "high", 2.5)
+
+    def test_case_is_normalized(self):
+        t = ticket("T001", "Wi-Fi down", "network", "HIGH", 5)
+        self.assertEqual(t["category"], "Network")
+        self.assertEqual(t["urgency"], "high")
+
 if __name__ == "__main__":
     unittest.main()
