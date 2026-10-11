@@ -43,3 +43,11 @@ def ticket(ticket_id, title, category, urgency, affected_users):
         "priority": priority
     }
     return fellow
+def next_id(tickets):
+    number = len(tickets) + 1
+    return f"T{number:03}"
+def create_ticket(tickets,title,category,urgency,affected_users):
+    new_id = next_id(tickets)
+    new = ticket(new_id,title,category,urgency,affected_users)
+    tickets.append(new)
+    return new

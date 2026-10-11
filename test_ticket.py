@@ -1,5 +1,5 @@
 import unittest
-from ticket import calculate_priority,ticket
+from ticket import calculate_priority,ticket,create_ticket
 
 class TestPriority(unittest.TestCase):
     def test_low_urgency_2_users_is_low(self):
@@ -50,6 +50,20 @@ class TestPriority(unittest.TestCase):
         t = ticket("T001", "Wi-Fi down", "network", "HIGH", 5)
         self.assertEqual(t["category"], "Network")
         self.assertEqual(t["urgency"], "high")
+    def test_ids_count_up(self):
+        tickets = []
+        first = create_ticket(tickets, "Wi-Fi down","Network","high",15)
+        second = create_ticket (tickets, "Broken laptop","Hardware", "low", 1)
+        self.assertEqual(first["id"], "T001")
+        self.assertEqual(second["id"], "T002")
+
+    def test_invalid_ticket_not_stored(self):
+        tickets = []
+        with self.assertRaises(ValueError):
+            create_ticket(tickets, "", "Hardware", "high", 5)
+        self.assertEqual(len(tickets), 0)
+
+        
 
 if __name__ == "__main__":
     unittest.main()
