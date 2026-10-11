@@ -8,6 +8,8 @@ def calculate_priority(urgency,affected_users):
     else:
         return "low"
 def ticket(ticket_id, title, category, urgency, affected_users):
+    if title.strip() == "":
+        raise ValueError("Title cannot be blank")
     priority = calculate_priority(urgency,affected_users)
 
     fellow = {

@@ -1,5 +1,5 @@
 import unittest
-from ticket import calculate_priority
+from ticket import calculate_priority,ticket
 
 class TestPriority(unittest.TestCase):
     def test_low_urgency_2_users_is_low(self):
@@ -27,6 +27,9 @@ class TestPriority(unittest.TestCase):
     def test_critical(self):
         answer = calculate_priority("high", 17)
         self.assertEqual(answer, "critical")
+    def test_blank_title_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ticket("T001", "   ", "Hardware", "high", 5)
 
 if __name__ == "__main__":
     unittest.main()
