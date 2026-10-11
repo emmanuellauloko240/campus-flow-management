@@ -30,6 +30,9 @@ class TestPriority(unittest.TestCase):
     def test_blank_title_is_rejected(self):
         with self.assertRaises(ValueError):
             ticket("T001", "   ", "Hardware", "high", 5)
+    def test_invalid_category_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ticket("T001", "Wi-Fi down", "Banana", "high", 5)
 
 if __name__ == "__main__":
     unittest.main()

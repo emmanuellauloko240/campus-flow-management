@@ -1,3 +1,5 @@
+ALLOWED_CATEGORIES = ["Network", "Hardware", "Software", "Other"]
+
 def calculate_priority(urgency,affected_users):
     if urgency == "high" and affected_users >= 10:
         return "critical"
@@ -10,7 +12,10 @@ def calculate_priority(urgency,affected_users):
 def ticket(ticket_id, title, category, urgency, affected_users):
     if title.strip() == "":
         raise ValueError("Title cannot be blank")
+    if category not in ALLOWED_CATEGORIES:
+        raise ValueError("Invalid category")
     priority = calculate_priority(urgency,affected_users)
+
 
     fellow = {
         "id": ticket_id,
