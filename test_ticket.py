@@ -1,6 +1,5 @@
 import unittest
 from ticket import calculate_priority,ticket,create_ticket
-
 class TestPriority(unittest.TestCase):
     def test_low_urgency_2_users_is_low(self):
         answer = calculate_priority("low",2)

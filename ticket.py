@@ -51,3 +51,24 @@ def create_ticket(tickets,title,category,urgency,affected_users):
     new = ticket(new_id,title,category,urgency,affected_users)
     tickets.append(new)
     return new
+def create_ticket_from_input(tickets):
+    title = input("Title: ")
+    category = input("Category (Network/Hardware/Software/Other): ")
+    urgency = input("Urgency (low/medium/high): ")
+    users_text = input("Affected users: ")
+    try:
+        affected_users = int(users_text)
+        new = create_ticket(tickets, title, category, urgency, affected_users)
+        print("Created", new["id"], "- priority:", new["priority"])
+    except ValueError as error:
+        print("Error:", error)
+
+
+if __name__ == "__main__":
+    tickets = []
+    while True:
+        create_ticket_from_input(tickets)
+        again = input("Create another? (y/n): ")
+        if again.strip().lower() != "y":
+            break
+    print("Tickets created:", len(tickets))
