@@ -14,7 +14,7 @@ def ticket(ticket_id, title, category, urgency, affected_users):
     title = title.strip()
     category = category.strip().capitalize()
     urgency = urgency.strip().lower()
-    if title.strip() == "":
+    if title == "":
         raise ValueError("Title cannot be blank")
     if category not in ALLOWED_CATEGORIES:
         raise ValueError("Invalid category")
