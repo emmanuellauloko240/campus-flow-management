@@ -21,12 +21,3 @@ def ticket(ticket_id, title, category, urgency, affected_users):
         "priority": priority
     }
     return fellow
-result = ticket("T001", "Faulty laptop", "Hardware", "high", 17)
-print(result)
-
-print(calculate_priority("high", 17))
-print(calculate_priority("high", 4))
-print(calculate_priority("low", 12))
-print(calculate_priority("medium", 1))
-print(calculate_priority("low", 3))
-print(calculate_priority("low", 2))
